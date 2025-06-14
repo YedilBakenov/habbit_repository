@@ -1,6 +1,6 @@
 package api.project.habit_tracker.service.impl;
 
-import api.project.habit_tracker.exeption.HabbitExeption;
+import api.project.habit_tracker.exception.HabbitException;
 import api.project.habit_tracker.model.Habbit;
 import api.project.habit_tracker.repository.HabbitRepository;
 import api.project.habit_tracker.service.HabbitService;
@@ -46,20 +46,14 @@ public class HabbitServiceImpl implements HabbitService {
 
     @Override
     public Habbit getHabbitById(long id) {
-        return habbitRepository.findById(id).orElseThrow();
+        return habbitRepository.findById(id).orElseThrow(()-> new HabbitException("NOT FOUND HABBIT"));
     }
 
     @Override
     public Habbit updateHabbit(long id, Habbit habbit) {
 
-        Habbit habbit1 = getHabbitById(id);
-
-        if(habbit1!=null){
-            habbit.setId(habbit1.getId());
-            habbitRepository.save(habbit);
-            return habbit;
-        }
-        return null;
+            habbit.setId(id);
+            return habbitRepository.save(habbit);
     }
 
     @Override
@@ -69,6 +63,7 @@ public class HabbitServiceImpl implements HabbitService {
 
     @Override
     public void deleteHabbitById(long id) {
+        Habbit habbit = getHabbitById(id);
         habbitRepository.deleteById(id);
     }
 }

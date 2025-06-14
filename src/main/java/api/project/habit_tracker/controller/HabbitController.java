@@ -1,16 +1,17 @@
 package api.project.habit_tracker.controller;
 
+import api.project.habit_tracker.dto.ErrorDto;
 import api.project.habit_tracker.dto.HabbitDto;
 import api.project.habit_tracker.mapper.HabbitMapper;
 import api.project.habit_tracker.model.Habbit;
 import api.project.habit_tracker.service.HabbitService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.PreUpdate;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -38,10 +39,29 @@ public class HabbitController {
                     @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = HabbitDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Неверный запрос",content = {
-                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                    examples = @ExampleObject(value = """
+                            {
+                                "status": 400,
+                                "title": "Validation failed",
+                                "detail": "Incorrect data"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
+
             }),
             @ApiResponse(responseCode = "500", description = "Внутренняя ошибка", content = {
-                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 500,
+                                "title": "Internal error",
+                                "detail": "Server error"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
             })
     })
     public ResponseEntity<List<HabbitDto>> getAllHabbits(
@@ -61,13 +81,41 @@ public class HabbitController {
                     @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = HabbitDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Неверный запрос",content = {
-                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 400,
+                                "title": "Validation failed",
+                                "detail": "Incorrect data"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
+
             }),
             @ApiResponse(responseCode = "404", description = "Не найдено",content = {
-                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 404,
+                                "title": "Habbit not found",
+                                "detail": "Object not found"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
             }),
             @ApiResponse(responseCode = "500", description = "Внутренняя ошибка", content = {
-                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 500,
+                                "title": "Internal error",
+                                "detail": "Server error"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
             })
     })
     public ResponseEntity<HabbitDto> getHabbitById(@PathVariable long id){
@@ -82,10 +130,29 @@ public class HabbitController {
                     @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = HabbitDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Неверный запрос",content = {
-                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 400,
+                                "title": "Validation failed",
+                                "detail": "Incorrect data"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
+
             }),
             @ApiResponse(responseCode = "500", description = "Внутренняя ошибка", content = {
-                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 500,
+                                "title": "Internal error",
+                                "detail": "Server error"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
             })
     })
     public ResponseEntity<HabbitDto> saveHabbit(@Valid @RequestBody HabbitDto habbitDto){
@@ -101,19 +168,96 @@ public class HabbitController {
                     @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = HabbitDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Неверный запрос",content = {
-                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 400,
+                                "title": "Validation failed",
+                                "detail": "Incorrect data"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
+
             }),
             @ApiResponse(responseCode = "404", description = "Не найдено",content = {
-                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 404,
+                                "title": "Habbit not found",
+                                "detail": "Object not found"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
             }),
             @ApiResponse(responseCode = "500", description = "Внутренняя ошибка", content = {
-                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 500,
+                                "title": "Internal error",
+                                "detail": "Server error"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
             })
     })
     public ResponseEntity<HabbitDto> updateHabbit(@PathVariable long id, @RequestBody @Valid HabbitDto habbitDto){
         Habbit habbit = habbitService.updateHabbit(id, habbitMapper.toModel(habbitDto));
 
         return ResponseEntity.ok(habbitMapper.toDto(habbit));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Удаление ресурса", description = "удаление привычки по id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Привычка удалена"),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос",content = {
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 400,
+                                "title": "Validation failed",
+                                "detail": "Incorrect data"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
+
+            }),
+            @ApiResponse(responseCode = "404", description = "Не найдено",content = {
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 404,
+                                "title": "Habbit not found",
+                                "detail": "Object not found"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
+            }),
+            @ApiResponse(responseCode = "500", description = "Внутренняя ошибка", content = {
+                    @Content(mediaType = MediaType.APPLICATION_PROBLEM_JSON_VALUE,
+                            examples = @ExampleObject(value = """
+                            {
+                                "status": 500,
+                                "title": "Internal error",
+                                "detail": "Server error"
+                            }
+                            """),
+                            schema = @Schema(implementation = ErrorDto.class)
+                    )
+            })
+    })
+    public ResponseEntity<Void> deleteHabbit(@PathVariable long id){
+
+        habbitService.deleteHabbitById(id);
+
+        return ResponseEntity.noContent().build();
     }
 
 }
