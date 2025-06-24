@@ -1,0 +1,56 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="2025_06_24_create_tables" author="yedil.bakenov">
+        <sqlFile
+                dbms="postgresql"
+                endDelimiter=";"
+                path="db/changelog/changes/2025_06_24_create_tables.sql"
+                relativeToChangelogFile="false"
+                stripComments="true"
+                splitStatements="true"
+        />
+    </changeSet>
+    <changeSet id="2025_06_24_insert_to_tables" author="yedil.bakenov">
+        <sqlFile
+                dbms="postgresql"
+                endDelimiter=";"
+                path="db/changelog/changes/2025_06_24_insert_to_tables.sql"
+                relativeToChangelogFile="false"
+                stripComments="true"
+                splitStatements="true"
+        />
+    </changeSet>
+    <changeSet id="2025_06_24_insert_to_table_habbits_new_data" author="yedil.bakenov">
+        <sqlFile
+                dbms="postgresql"
+                endDelimiter=";"
+                path="db/changelog/changes/2025_06_24_insert_to_table_habbits_new_data.sql"
+                relativeToChangelogFile="false"
+                stripComments="true"
+                splitStatements="true"
+        />
+    </changeSet>
+    <changeSet id="2025_06_24_change_field_name_to_text" author="yedil.bakenov">
+        <sqlFile
+                dbms="postgresql"
+                endDelimiter=";"
+                path="db/changelog/changes/2025_06_24_change_field_name_to_text.sql"
+                relativeToChangelogFile="false"
+                stripComments="true"
+                splitStatements="true"
+        />
+    </changeSet>
+    <changeSet id="2025_06_24_change_field_name_to_text_using" author="yedil.bakenov">
+        <sqlFile
+                dbms="postgresql"
+                endDelimiter=";"
+                path="db/changelog/changes/2025_06_24_change_field_name_to_text_using.sql"
+                relativeToChangelogFile="false"
+                stripComments="true"
+                splitStatements="true"
+        />
+    </changeSet>
+</databaseChangeLog>
